@@ -42,6 +42,12 @@ int main()
    cout << last << endl;
    cout << size << endl;
    a.print();
-   
+   cout << endl;
+
+   ArraySequence<int>* sub = a.get_subsequence(0, 2);
+   cout << "Sub:" << endl;
+   sub->print();
+   delete sub;
+
    return 0;
 }
