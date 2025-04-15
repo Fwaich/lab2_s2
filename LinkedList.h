@@ -23,12 +23,17 @@ public:
     ~LinkedList();
 
     void append(T item);
+    void prepend(T item);
+    T get(int index);
+    T get_first();
+    T get_last();
 
 
     void print() {
         Node* node = head;
+        int i = 0;
         while (node != nullptr) {
-            cout << node->value << endl;
+            cout << "{" << i++ << "}: " << node->value << endl;
             node = node->next;
         }
     }
@@ -72,3 +77,41 @@ void LinkedList<T>::append(T item){
     tail = node;
     length++;
 };
+
+template <typename T>
+void LinkedList<T>::prepend(T item){
+    if (length == 0){
+        append(item);
+        return;
+    }
+
+    Node* node = new Node(item);
+    node->next = head;
+    head->prev = node;
+    head = node;
+    length++;
+}
+
+template <typename T>
+T LinkedList<T>::get(int index){
+    if (index >= length || index < 0){
+        throw out_of_range("List: Index out of bounds");
+    }
+
+    Node* node = head;
+    for (int i = 0; i < index; i++) {
+        node = node->next;
+    }
+
+    return node->value;
+}
+
+template <typename T>
+T LinkedList<T>::get_first(){
+    return head->value;
+}
+
+template <typename T>
+T LinkedList<T>::get_last(){
+    return tail->value;
+}

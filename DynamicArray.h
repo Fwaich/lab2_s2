@@ -53,7 +53,7 @@ DynamicArray<T>::~DynamicArray(){
 template <typename T>
 T DynamicArray<T>::get(int index){
     if (index >= size || index < 0){
-        throw out_of_range("Index out of bounds");
+        throw out_of_range("Array: index out of bounds");
     }
 
     return data[index];

@@ -67,7 +67,10 @@ int main()
    // delete sub;
 
    LinkedList<int> a(arr_int, 5);
+   a.prepend(0);
    a.print();
+   int num_int = a.get_last();
+   cout << "num: " << num_int << endl;
 
    return 0;
 }
