@@ -1,9 +1,10 @@
 #pragma once
 #include <iostream>
 #include "DynamicArray.h"
+#include "Sequence.h"
 
 template <typename T>
-class ArraySequence 
+class ArraySequence : public Sequence<T>
 {
 private:
     DynamicArray<T>* items;
@@ -11,16 +12,16 @@ public:
 
     ArraySequence();
     ArraySequence(T* arr, int count);
-    ~ArraySequence();
+    ~ArraySequence() override;
 
-    T get(int index);
-    T get_first();
-    T get_last();
-    int get_size();
-    ArraySequence<T>* get_subsequence(int start_index, int end_index);
+    T get(int index) override;
+    T get_first() override;
+    T get_last() override;
+    int get_size() override;
+    ArraySequence<T>* get_subsequence(int start_index, int end_index) override;
 
 
-    void print() {
+    void print() override{
         items->print();
     }
 };

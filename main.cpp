@@ -2,6 +2,9 @@
 #include <string>
 #include "DynamicArray.h"
 #include "ArraySequence.h"
+#include "LinkedList.h"
+#include "Sequence.h"
+// #include "stdafx.h"
 //перегрузка операторов обязательно
 //родителя убивать всегда
 
@@ -9,8 +12,10 @@ using namespace std;
 
 int main()
 {
-   // int arr[] = {1, 2, 3, 4, 5};
-   // double arr[] = {1.33, 2.4, 3.5, 4.6, 5.8};
+   int arr_int[] = {1, 2, 3, 4, 5};
+   double arr_double[] = {1.33, 2.4, 3.5, 4.6, 5.8};
+
+
    // DynamicArray<double> a(arr, 5);
    // DynamicArray<double> a(5);
    // string arr[] = {"a","a","a","a","a"};
@@ -31,23 +36,38 @@ int main()
    // cout << num << endl;
    // a.print();
 
-   int arr[] = {1, 2, 3, 4, 5};
-   ArraySequence<int> a(arr, 5);
-   int num = a.get(3);
-   int size = a.get_size();
-   int first = a.get_first();
-   int last = a.get_last();
-   cout << num << endl;
-   cout << first << endl;
-   cout << last << endl;
-   cout << size << endl;
-   a.print();
-   cout << endl;
 
-   ArraySequence<int>* sub = a.get_subsequence(0, 2);
-   cout << "Sub:" << endl;
-   sub->print();
-   delete sub;
+   // ArraySequence<int> a(arr, 5);
+   // int num = a.get(3);
+   // int size = a.get_size();
+   // int first = a.get_first();
+   // int last = a.get_last();
+   // cout << num << endl;
+   // cout << first << endl;
+   // cout << last << endl;
+   // cout << size << endl;
+   // a.print();
+   // cout << endl;
+
+   // ArraySequence<int>* sub = a.get_subsequence(0, 2);
+   // cout << "Sub:" << endl;
+   // sub->print();
+   // delete sub;
+
+   // LinkedList<int> a(arr, 5);
+   // a.append(1);
+   // a.append(2);
+
+
+   // Sequence<int>* seq = new ArraySequence<int>(arr, 5);
+   // Sequence<int>* sub = seq->get_subsequence(1, 3);
+   // sub->print();
+
+   // delete seq;
+   // delete sub;
+
+   LinkedList<int> a(arr_int, 5);
+   a.print();
 
    return 0;
 }
