@@ -70,7 +70,7 @@ ArraySequence<T>* ArraySequence<T>::get_subsequence(int start_index, int end_ind
 
     if (start_index < 0 || start_index >= items->get_size() ||
         end_index < 0 || end_index >= items->get_size()) {
-        throw out_of_range("start||end out of bounds");
+        throw out_of_range("Sub_array: start||end out of bounds");
     }
 
     if (start_index > end_index){

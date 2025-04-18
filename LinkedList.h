@@ -27,6 +27,8 @@ public:
     T get(int index);
     T get_first();
     T get_last();
+    int get_length();
+    LinkedList<T>* get_sublist(int start_index, int end_index);
 
 
     void print() {
@@ -114,4 +116,41 @@ T LinkedList<T>::get_first(){
 template <typename T>
 T LinkedList<T>::get_last(){
     return tail->value;
+};
+
+template <typename T>
+int LinkedList<T>::get_length() {
+    return length;
 }
+
+template <typename T>
+LinkedList<T>* LinkedList<T>::get_sublist(int start_index, int end_index){
+    if (!head) throw logic_error("List data is null");
+
+    if (start_index < 0 || start_index >= get_length() ||
+        end_index < 0 || end_index >= get_length()) {
+        throw out_of_range("Sub_list: start||end out of bounds");
+    }
+
+    if (start_index > end_index){
+        int tmp = end_index;
+        end_index = start_index;
+        start_index = tmp;
+    }
+
+    LinkedList<T>* sub_list = new LinkedList<T>;
+
+    int tmp_length = 0;
+    Node* node = head;
+    while (tmp_length != start_index) {
+        node = node->next;
+        tmp_length++;
+    }
+
+    for (int i = start_index; i < end_index + 1; i++) {
+        sub_list->append(node->value);
+        node = node->next;
+    }
+
+    return sub_list;
+};

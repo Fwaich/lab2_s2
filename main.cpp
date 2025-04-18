@@ -69,8 +69,12 @@ int main()
    LinkedList<int> a(arr_int, 5);
    a.prepend(0);
    a.print();
-   int num_int = a.get_last();
+   int num_int = a.get_first();
    cout << "num: " << num_int << endl;
 
+   LinkedList<int>* sub_list = a.get_sublist(1, 3);
+   cout << "a" << endl;
+   sub_list->print();
+   delete sub_list;
    return 0;
 }
