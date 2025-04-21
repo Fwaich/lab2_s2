@@ -24,6 +24,7 @@ public:
 
     void append(T item);
     void prepend(T item);
+    void set(int index, T item);
     T get(int index);
     T get_first();
     T get_last();
@@ -95,9 +96,21 @@ void LinkedList<T>::prepend(T item){
 }
 
 template <typename T>
+void LinkedList<T>::set(int index, T item){
+    if (index < 0 || index >= length) throw out_of_range("List: set_index out of bounds");
+
+    Node* node = head;
+    for (int i = 0; i < index; i++) {
+        node = node->next;
+    }
+
+    node->value = item;
+}
+
+template <typename T>
 T LinkedList<T>::get(int index){
     if (index >= length || index < 0){
-        throw out_of_range("List: Index out of bounds");
+        throw out_of_range("List: get_index out of bounds");
     }
 
     Node* node = head;

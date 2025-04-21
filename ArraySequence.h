@@ -14,6 +14,9 @@ public:
     ArraySequence(T* arr, int count);
     ~ArraySequence() override;
 
+    void append(T item) override;
+    void prepend(T item) override;
+    void set(int index, T item) override;
     T get(int index) override;
     T get_first() override;
     T get_last() override;
@@ -39,6 +42,31 @@ ArraySequence<T>::ArraySequence(T* arr, int count){
 template <typename T>
 ArraySequence<T>::~ArraySequence(){
     delete items;
+}
+
+template <typename T>
+void ArraySequence<T>::append(T item){
+    int new_size = items->get_size() + 1;
+    items->resize(new_size);
+
+    items->set(new_size - 1, item);
+}
+
+template <typename T>
+void ArraySequence<T>::prepend(T item){
+    int new_size = items->get_size() + 1;
+    items->resize(new_size);
+
+    for (int i = new_size - 1; i > 0; i--) {
+        items->set(i, items->get(i - 1));
+    }
+
+    items->set(0, item);
+}
+
+template <typename T>
+void ArraySequence<T>::set(int index, T item){
+    items->set(index, item);
 }
 
 template <typename T>

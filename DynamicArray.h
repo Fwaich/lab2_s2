@@ -79,8 +79,7 @@ void DynamicArray<T>::set(int index, T value){
 template <typename T>
 void DynamicArray<T>::resize(int new_size){
     if (new_size < 0){
-        // cout << "invalid index" << endl;
-        throw invalid_argument("New size must be non-negative");
+        throw invalid_argument("Array: New size must be non-negative");
         return;
     }
     
