@@ -19,7 +19,8 @@ private:
     
 public:
     LinkedList();
-    LinkedList(T* items, size_t count);
+    LinkedList(T* arr, int count);
+    LinkedList (const LinkedList<T>& list);
     ~LinkedList();
 
     void append(T item);
@@ -46,12 +47,25 @@ template <typename T>
 LinkedList<T>::LinkedList(): head(nullptr), tail(nullptr), length(0){}
 
 template <typename T>
-LinkedList<T>::LinkedList(T* items, size_t count){
+LinkedList<T>::LinkedList(T* arr, int count){
     length = 0;
     for (int i = 0; i < count; i++){
-        append(items[i]);
+        append(arr[i]);
     }
 };
+
+template <typename T>
+LinkedList<T>::LinkedList(const LinkedList<T>& list) {
+    head = tail = nullptr;
+    length = 0;
+
+    Node* current = list.head;
+    while (current) {
+        append(current->value);
+        current = current->next;
+    }
+}
+
 
 template <typename T>
 LinkedList<T>::~LinkedList(){

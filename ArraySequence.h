@@ -12,6 +12,7 @@ public:
 
     ArraySequence();
     ArraySequence(T* arr, int count);
+    ArraySequence( Sequence<T>& seq);
     ~ArraySequence() override;
 
     void append(T item) override;
@@ -37,6 +38,15 @@ ArraySequence<T>::ArraySequence(){
 template <typename T>
 ArraySequence<T>::ArraySequence(T* arr, int count){
     items = new DynamicArray<T>(arr, count);
+}
+
+template <typename T>
+ArraySequence<T>::ArraySequence( Sequence<T>& seq){
+    items = new DynamicArray<T>(seq.get_size());
+
+    for (int i = 0; i < items->get_size(); i++){
+        set(i, seq.get(i));
+    }
 }
 
 template <typename T>

@@ -6,6 +6,7 @@ class Sequence
 public:
 
     virtual ~Sequence() = 0;
+
     virtual void append(T item) = 0;
     virtual void prepend(T item) = 0;
     virtual void set(int index, T item) = 0;
