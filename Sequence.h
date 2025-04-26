@@ -7,9 +7,9 @@ public:
 
     virtual ~Sequence() = 0;
 
-    virtual void append(T item) = 0;
-    virtual void prepend(T item) = 0;
-    virtual void set(int index, T item) = 0;
+    virtual Sequence<T>* append(T item) = 0;
+    virtual Sequence<T>* prepend(T item) = 0;
+    virtual Sequence<T>* set(int index, T item) = 0;
     virtual T get(int index) = 0;
     virtual T get_first() = 0;
     virtual T get_last() = 0;

@@ -18,9 +18,9 @@ public:
     ListSequence(const LinkedList<T>& list);
     ~ListSequence() override;
 
-    void append(T item) override;
-    void prepend(T item) override;
-    void set(int index, T item) override;
+    ListSequence<T>* append(T item) override;
+    ListSequence<T>* prepend(T item) override;
+    ListSequence<T>* set(int index, T item) override;
     T get(int index) override;
     T get_first() override;
     T get_last() override;
@@ -63,18 +63,21 @@ ListSequence<T>::~ListSequence(){
 };
 
 template <typename T>
-void ListSequence<T>::append(T item){
+ListSequence<T>* ListSequence<T>::append(T item){
     items->append(item);
+    return this;
 };
 
 template <typename T>
-void ListSequence<T>::prepend(T item){
+ListSequence<T>* ListSequence<T>::prepend(T item){
     items->prepend(item);
+    return this;
 };
 
 template <typename T>
-void ListSequence<T>::set(int index, T value){
+ListSequence<T>* ListSequence<T>::set(int index, T value){
     items->set(index, value);
+    return this;
 };
 
 template <typename T>
