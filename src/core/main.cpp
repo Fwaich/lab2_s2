@@ -9,7 +9,6 @@
 #include "ImmutableListSequence.h"
 // #include "stdafx.h"
 //перегрузка операторов обязательно
-//родителя убивать всегда
 
 using namespace std;
 
@@ -116,13 +115,11 @@ int main()
 
    // ConstArraySequence<int> a(arr_int, 5);
    // a.print();
-   Sequence<int>* a = new ConstListSequence<int>(arr_int, 5);
-   Sequence<int>* b = nullptr;
-   b = a->set(1, 100);
-   b->print();
+   Sequence<int>* a = new ListSequence<int>(arr_int, 5);
+   a->print();
 
    delete a;
-   delete b;
+   // delete b;
 
    return 0;
 }
