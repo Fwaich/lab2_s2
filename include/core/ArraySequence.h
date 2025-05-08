@@ -18,11 +18,11 @@ public:
     ArraySequence<T>* append(T item) override;
     ArraySequence<T>* prepend(T item) override;
     ArraySequence<T>* set(int index, T item) override;
-    T get(int index) override;
-    T get_first() override;
-    T get_last() override;
-    int get_size() override;
-    ArraySequence<T>* get_subsequence(int start_index, int end_index) override;
+    T get(int index) const override;
+    T get_first() const override;
+    T get_last() const override;
+    int get_size() const override;
+    ArraySequence<T>* get_subsequence(int start_index, int end_index) const override;
 
 
     void print() override{
@@ -86,30 +86,30 @@ ArraySequence<T>* ArraySequence<T>::set(int index, T item){
 }
 
 template <typename T>
-T ArraySequence<T>::get(int index){
+T ArraySequence<T>::get(int index) const {
     return items->get(index);
 }
 
 template <typename T>
-int ArraySequence<T>::get_size(){
+int ArraySequence<T>::get_size() const {
     return items->get_size();
 }
 
 template <typename T>
-T ArraySequence<T>::get_first(){
+T ArraySequence<T>::get_first() const {
     if (items->get_size() == 0) throw out_of_range("Array not initialized");
     return items->get(0);
 }
 
 template <typename T>
-T ArraySequence<T>::get_last(){
+T ArraySequence<T>::get_last() const {
     int size_of_array = items->get_size();
     if (size_of_array == 0) throw out_of_range("Array not initialized");
     return items->get(size_of_array - 1);
 }
 
 template <typename T>
-ArraySequence<T>* ArraySequence<T>::get_subsequence(int start_index, int end_index){
+ArraySequence<T>* ArraySequence<T>::get_subsequence(int start_index, int end_index) const {
     if (!items) throw logic_error("Array data is null");
 
     if (start_index < 0 || start_index >= items->get_size() ||

@@ -14,18 +14,18 @@ public:
 
     ListSequence();
     ListSequence(T* arr, int count);
-    ListSequence(Sequence<T>& seq);
+    ListSequence(const Sequence<T>& seq);
     ListSequence(const LinkedList<T>& list);
     ~ListSequence() override;
 
     ListSequence<T>* append(T item) override;
     ListSequence<T>* prepend(T item) override;
     ListSequence<T>* set(int index, T item) override;
-    T get(int index) override;
-    T get_first() override;
-    T get_last() override;
-    int get_size() override;
-    ListSequence<T>* get_subsequence(int start_index, int end_index) override;
+    T get(int index) const override;
+    T get_first() const override;
+    T get_last() const override;
+    int get_size() const override;
+    ListSequence<T>* get_subsequence(int start_index, int end_index) const override;
 
     void print() override{
         items->print();
@@ -44,7 +44,7 @@ ListSequence<T>::ListSequence(T* arr, int count){
 };
 
 template <typename T>
-ListSequence<T>::ListSequence(Sequence<T>& seq){
+ListSequence<T>::ListSequence(const Sequence<T>& seq){
     items = new LinkedList<T>();
 
     for (int i = 0; i < seq.get_size(); i++){
@@ -81,29 +81,29 @@ ListSequence<T>* ListSequence<T>::set(int index, T value){
 };
 
 template <typename T>
-T ListSequence<T>::get(int index){
+T ListSequence<T>::get(int index) const{
     return items->get(index);
 };
 
 template <typename T>
-T ListSequence<T>::get_first(){
+T ListSequence<T>::get_first() const {
     if (items->get_length() == 0)  throw out_of_range("get_first: list not initialized");
     return items->get_first();
 };
 
 template <typename T>
-T ListSequence<T>::get_last(){
+T ListSequence<T>::get_last() const {
     if (items->get_length() == 0)  throw out_of_range("get_last: list not initialized");
     return items->get_last();
 };
 
 template <typename T>
-int ListSequence<T>::get_size(){
+int ListSequence<T>::get_size() const{
     return items->get_length();
 };
 
 template <typename T>
-ListSequence<T>* ListSequence<T>::get_subsequence(int start_index, int end_index){
+ListSequence<T>* ListSequence<T>::get_subsequence(int start_index, int end_index) const {
     LinkedList<T>* sublist = items->get_sublist(start_index, end_index);
     ListSequence<T>* sublist_sequence = new ListSequence<T>(*sublist);
     delete sublist;

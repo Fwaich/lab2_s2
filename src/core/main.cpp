@@ -1,3 +1,4 @@
+// #include <wx/wx.h>
 #include <iostream>
 #include <string>
 #include "DynamicArray.h"
@@ -115,8 +116,10 @@ int main()
 
    // ConstArraySequence<int> a(arr_int, 5);
    // a.print();
-   Sequence<int>* a = new ListSequence<int>(arr_int, 5);
+   Sequence<int>* a = new ConstListSequence<int>(arr_int, 5);
+   // a->append(1032);
    a->print();
+
 
    delete a;
    // delete b;

@@ -14,7 +14,7 @@ public:
     ConstArraySequence<T>* append(T item) override;
     ConstArraySequence<T>* prepend(T item) override;
     ConstArraySequence<T>* set(int index, T item) override;
-    ConstArraySequence<T>* get_subsequence(int start_index, int end_index) override;
+    ConstArraySequence<T>* get_subsequence(int start_index, int end_index) const override;
 
 };
 
@@ -76,7 +76,7 @@ ConstArraySequence<T>* ConstArraySequence<T>::set(int index, T item){
 }
 
 template <typename T>
-ConstArraySequence<T>* ConstArraySequence<T>::get_subsequence(int start_index, int end_index) {
+ConstArraySequence<T>* ConstArraySequence<T>::get_subsequence(int start_index, int end_index) const {
     ArraySequence<T>* sub = ArraySequence<T>::get_subsequence(start_index, end_index);
 
     int size = sub->get_size();

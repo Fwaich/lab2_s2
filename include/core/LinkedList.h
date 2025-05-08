@@ -26,11 +26,11 @@ public:
     void append(T item);
     void prepend(T item);
     void set(int index, T item);
-    T get(int index);
-    T get_first();
-    T get_last();
-    int get_length();
-    LinkedList<T>* get_sublist(int start_index, int end_index);
+    T get(int index) const;
+    T get_first() const;
+    T get_last()const;
+    int get_length() const;
+    LinkedList<T>* get_sublist(int start_index, int end_index) const;
 
 
     void print() {
@@ -122,7 +122,7 @@ void LinkedList<T>::set(int index, T item){
 }
 
 template <typename T>
-T LinkedList<T>::get(int index){
+T LinkedList<T>::get(int index) const{
     if (index >= length || index < 0){
         throw out_of_range("List: get_index out of bounds");
     }
@@ -136,22 +136,22 @@ T LinkedList<T>::get(int index){
 }
 
 template <typename T>
-T LinkedList<T>::get_first(){
+T LinkedList<T>::get_first() const {
     return head->value;
 }
 
 template <typename T>
-T LinkedList<T>::get_last(){
+T LinkedList<T>::get_last() const {
     return tail->value;
 };
 
 template <typename T>
-int LinkedList<T>::get_length() {
+int LinkedList<T>::get_length() const {
     return length;
 }
 
 template <typename T>
-LinkedList<T>* LinkedList<T>::get_sublist(int start_index, int end_index){
+LinkedList<T>* LinkedList<T>::get_sublist(int start_index, int end_index) const {
     if (!head) throw logic_error("List data is null");
 
     if (start_index < 0 || start_index >= get_length() ||

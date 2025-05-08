@@ -23,9 +23,9 @@ run: main
 	./$(BIN)/main
 
 clean: 
-	rm -r $(OBJ)/*
+	rm -r obj/*
 
 cleanall: clean
-	rm -r $(BIN)/*
-	rm -r $(LIB)/*
+	rm -r bin/*
+	rm -r lib/*
 	

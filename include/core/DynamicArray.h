@@ -18,8 +18,8 @@ public:
     DynamicArray(T* items, int count);
     ~DynamicArray();
 
-    T get(int index);
-    int get_size();
+    T get(int index) const;
+    int get_size() const;
     void set(int index, T value);
     void resize(int new_size);
 
@@ -51,7 +51,7 @@ DynamicArray<T>::~DynamicArray(){
 };
 
 template <typename T>
-T DynamicArray<T>::get(int index){
+T DynamicArray<T>::get(int index) const {
     if (index >= size || index < 0){
         throw out_of_range("Array: index out of bounds");
     }
@@ -61,7 +61,7 @@ T DynamicArray<T>::get(int index){
 }
 
 template <typename T>
-int DynamicArray<T>::get_size(){
+int DynamicArray<T>::get_size() const {
     return size;
 };
 

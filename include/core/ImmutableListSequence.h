@@ -14,7 +14,7 @@ public:
     ConstListSequence<T>* append(T item) override;
     ConstListSequence<T>* prepend(T item) override;
     ConstListSequence<T>* set(int index, T item) override;
-    ConstListSequence<T>* get_subsequence(int start_index, int end_index) override;
+    ConstListSequence<T>* get_subsequence(int start_index, int end_index) const override;
     
 };
 
@@ -76,7 +76,7 @@ ConstListSequence<T>* ConstListSequence<T>::set(int index, T item) {
 }
 
 template <typename T>
-ConstListSequence<T>* ConstListSequence<T>::get_subsequence(int start_index, int end_index) {
+ConstListSequence<T>* ConstListSequence<T>::get_subsequence(int start_index, int end_index) const {
     ListSequence<T>* sub = ListSequence<T>::get_subsequence(start_index, end_index);
 
     int size = sub->get_size();
