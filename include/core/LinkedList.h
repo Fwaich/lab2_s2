@@ -1,5 +1,7 @@
 #pragma once
 
+#include "exceptions.h"
+
 template <typename T>
 class LinkedList
 {
@@ -111,7 +113,7 @@ void LinkedList<T>::prepend(T item){
 
 template <typename T>
 void LinkedList<T>::set(int index, T item){
-    if (index < 0 || index >= length) throw out_of_range("List: set_index out of bounds");
+    if (index < 0 || index >= length) throw list_out_of_range();
 
     Node* node = head;
     for (int i = 0; i < index; i++) {
@@ -123,9 +125,7 @@ void LinkedList<T>::set(int index, T item){
 
 template <typename T>
 T LinkedList<T>::get(int index) const{
-    if (index >= length || index < 0){
-        throw out_of_range("List: get_index out of bounds");
-    }
+    if (index >= length || index < 0) throw list_out_of_range();
 
     Node* node = head;
     for (int i = 0; i < index; i++) {
@@ -152,11 +152,11 @@ int LinkedList<T>::get_length() const {
 
 template <typename T>
 LinkedList<T>* LinkedList<T>::get_sublist(int start_index, int end_index) const {
-    if (!head) throw logic_error("List data is null");
+    if (!head) throw data_is_null();
 
     if (start_index < 0 || start_index >= get_length() ||
         end_index < 0 || end_index >= get_length()) {
-        throw out_of_range("Sub_list: start||end out of bounds");
+        throw list_out_of_range();
     }
 
     if (start_index > end_index){

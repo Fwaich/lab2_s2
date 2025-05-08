@@ -1,9 +1,8 @@
 #pragma once
 #include <iostream>
-#include <cstring>
-#include <iomanip>
 #include "LinkedList.h"
 #include "Sequence.h"
+#include "exceptions.h"
 
 template <typename T>
 class ListSequence: public Sequence<T>

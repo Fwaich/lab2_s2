@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ArraySequence.h"
+#include "exceptions.h"
 
 template <typename T>
 class ConstArraySequence : public ArraySequence<T> 
@@ -63,6 +64,8 @@ ConstArraySequence<T>* ConstArraySequence<T>::prepend(T item){
 template <typename T>
 ConstArraySequence<T>* ConstArraySequence<T>::set(int index, T item){
     int size = this->get_size();
+
+    if (index >= size || index < 0) throw array_out_of_range();
     T* new_data = new T[size];
 
     for (int i = 0; i < size; i++) {

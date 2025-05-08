@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
-#include <cstring>
-#include <iomanip>
+#include "exceptions.h"
 
 using namespace std;
 
@@ -52,9 +51,7 @@ DynamicArray<T>::~DynamicArray(){
 
 template <typename T>
 T DynamicArray<T>::get(int index) const {
-    if (index >= size || index < 0){
-        throw out_of_range("Array: index out of bounds");
-    }
+    if (index >= size || index < 0) throw array_out_of_range();
 
     return data[index];
 
@@ -67,10 +64,7 @@ int DynamicArray<T>::get_size() const {
 
 template <typename T>
 void DynamicArray<T>::set(int index, T value){
-    if (index >= size || index < 0) {
-        cout << "invalid index" << endl;
-        return;
-    }
+    if (index >= size || index < 0)  throw array_out_of_range();
 
     data[index] = value; 
 

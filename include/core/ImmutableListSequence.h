@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ListSequence.h"
+#include "exceptions.h"
 
 template <typename T>
 class ConstListSequence : public ListSequence<T>
@@ -63,6 +64,8 @@ ConstListSequence<T>* ConstListSequence<T>::prepend(T item) {
 template <typename T>
 ConstListSequence<T>* ConstListSequence<T>::set(int index, T item) {
     int size = this->get_size();
+
+    if (index >= size || index < 0) throw array_out_of_range();
     T* new_data = new T[size];
 
     for (int i = 0; i < size; i++) {

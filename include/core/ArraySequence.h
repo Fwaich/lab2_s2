@@ -2,6 +2,7 @@
 #include <iostream>
 #include "DynamicArray.h"
 #include "Sequence.h"
+#include "exceptions.h"
 
 template <typename T>
 class ArraySequence : public Sequence<T>
@@ -97,24 +98,24 @@ int ArraySequence<T>::get_size() const {
 
 template <typename T>
 T ArraySequence<T>::get_first() const {
-    if (items->get_size() == 0) throw out_of_range("Array not initialized");
+    if (items->get_size() == 0) throw array_out_of_range();
     return items->get(0);
 }
 
 template <typename T>
 T ArraySequence<T>::get_last() const {
     int size_of_array = items->get_size();
-    if (size_of_array == 0) throw out_of_range("Array not initialized");
+    if (size_of_array == 0) throw array_out_of_range();
     return items->get(size_of_array - 1);
 }
 
 template <typename T>
 ArraySequence<T>* ArraySequence<T>::get_subsequence(int start_index, int end_index) const {
-    if (!items) throw logic_error("Array data is null");
+    if (!items) throw data_is_null();
 
     if (start_index < 0 || start_index >= items->get_size() ||
         end_index < 0 || end_index >= items->get_size()) {
-        throw out_of_range("Sub_array: start||end out of bounds");
+        throw array_out_of_range();
     }
 
     if (start_index > end_index){
