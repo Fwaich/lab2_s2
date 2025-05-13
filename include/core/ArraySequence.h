@@ -25,10 +25,8 @@ public:
     int get_size() const override;
     ArraySequence<T>* get_subsequence(int start_index, int end_index) const override;
 
+    std::string to_string() const override;
 
-    void print() override{
-        items->print();
-    }
 };
 
 template <typename T>
@@ -135,4 +133,20 @@ ArraySequence<T>* ArraySequence<T>::get_subsequence(int start_index, int end_ind
     ArraySequence<T>* sub_array = new ArraySequence<T>(sub_data, sub_size);
     delete[] sub_data;
     return sub_array;
+}
+
+template <typename T>
+std::string ArraySequence<T>::to_string() const {
+    std::string result = "[";
+
+    for (int i = 0; i < items->get_size(); ++i) {
+        result += std::to_string(items->get(i)); 
+
+        if (i != items->get_size() - 1) {
+            result += ", ";
+        }
+    }
+
+    result += "]";
+    return result;
 }

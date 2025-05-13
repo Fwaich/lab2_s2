@@ -7,7 +7,7 @@ INC = include
 LIB = lib
 
 CXXFLAGS = -I$(INC) `wx-config --cxxflags`
-LIBFLAGS = `wx-config --libs` -L$(LIB) -lcore
+LIBFLAGS = `wx-config --libs` -L$(LIB) -Wl,-R$(LIB) -lcore
 
 LIBSRC = $(wildcard $(SRC)/core/*.cpp)
 LIBOBJ = $(patsubst $(SRC)/core/%.cpp, $(OBJ)/core/%.o, $(LIBSRC))

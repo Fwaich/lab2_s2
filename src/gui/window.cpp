@@ -1,9 +1,19 @@
 #include "gui/window.hpp"
+#include "core/ArraySequence.h"
+#include "core/ListSequence.h"
 
-MyFrame::MyFrame() : wxFrame(nullptr, wxID_ANY, "Anal"){
+MyFrame::MyFrame() : wxFrame(nullptr, wxID_ANY, "WX"){
+
+    wxSize screenSize = wxGetDisplaySize();
+    int frameWidth = screenSize.GetWidth() / 2;
+    int frameHeight = screenSize.GetHeight() / 2;
+    wxPoint framePosition(screenSize.GetWidth() / 2, 0);
+    SetSize(framePosition.x, framePosition.y, frameWidth, frameHeight);
+
 
     wxMenu* menuFile = new wxMenu; 
     menuFile->Append(ID_Hello, "dsald", "help in statusbar");
+    menuFile->Append(ID_Array, "Create an array", "ligmabows");
  
     menuFile->AppendSeparator();
     menuFile->Append(wxID_EXIT);
@@ -21,6 +31,7 @@ MyFrame::MyFrame() : wxFrame(nullptr, wxID_ANY, "Anal"){
     SetStatusText("Welcome to wxWidgets!");
  
     Bind(wxEVT_MENU, &MyFrame::OnHello, this, ID_Hello);
+    Bind(wxEVT_MENU, &MyFrame::OnCreateArray, this, ID_Array);
     Bind(wxEVT_MENU, &MyFrame::OnAbout, this, wxID_ABOUT);
     Bind(wxEVT_MENU, &MyFrame::OnExit, this, wxID_EXIT);
  }
@@ -40,3 +51,12 @@ MyFrame::MyFrame() : wxFrame(nullptr, wxID_ANY, "Anal"){
  {
      wxLogMessage("Hello world from wxWidgets!");
  }
+
+void MyFrame::OnCreateArray(wxCommandEvent& event)
+{
+    int arr[] {1, 2, 3, 4};
+    Sequence<int>* seq = new ListSequence<int>(arr, 4);
+    wxPuts(seq->to_string());
+
+    delete seq;
+}

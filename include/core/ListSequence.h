@@ -26,9 +26,7 @@ public:
     int get_size() const override;
     ListSequence<T>* get_subsequence(int start_index, int end_index) const override;
 
-    void print() override{
-        items->print();
-    }
+    std::string to_string() const override;
 
 };
 
@@ -108,3 +106,19 @@ ListSequence<T>* ListSequence<T>::get_subsequence(int start_index, int end_index
     delete sublist;
     return sublist_sequence;
 };
+
+template <typename T>
+std::string ListSequence<T>::to_string() const{
+    std::string result = "{";
+
+    for (int i = 0; i < get_size(); ++i) {
+        result += std::to_string(items->get(i));
+
+        if (i != get_size() - 1) {
+            result += ", ";
+        }
+    }
+
+    result += "}";
+    return result;
+}
