@@ -1,5 +1,8 @@
 #pragma once
+#include <type_traits>
+#include <sstream>
 #include <iostream>
+#include <iomanip>
 #include "LinkedList.h"
 #include "Sequence.h"
 #include "exceptions.h"
@@ -84,19 +87,19 @@ T ListSequence<T>::get(int index) const{
 
 template <typename T>
 T ListSequence<T>::get_first() const {
-    if (items->get_length() == 0)  throw out_of_range("get_first: list not initialized");
+    if (items->get_size() == 0)  throw out_of_range("get_first: list not initialized");
     return items->get_first();
 };
 
 template <typename T>
 T ListSequence<T>::get_last() const {
-    if (items->get_length() == 0)  throw out_of_range("get_last: list not initialized");
+    if (items->get_size() == 0)  throw out_of_range("get_last: list not initialized");
     return items->get_last();
 };
 
 template <typename T>
 int ListSequence<T>::get_size() const{
-    return items->get_length();
+    return items->get_size();
 };
 
 template <typename T>
@@ -107,14 +110,23 @@ ListSequence<T>* ListSequence<T>::get_subsequence(int start_index, int end_index
     return sublist_sequence;
 };
 
+
 template <typename T>
-std::string ListSequence<T>::to_string() const{
+std::string ListSequence<T>::to_string() const {
     std::string result = "{";
 
-    for (int i = 0; i < get_size(); ++i) {
-        result += std::to_string(items->get(i));
+    for (int i = 0; i < items->get_size(); ++i) {
+        if constexpr (std::is_same_v<T, std::string>) {
+            result += items->get(i);
+        } else if constexpr (std::is_same_v<T, double>) {
+            std::ostringstream oss;
+            oss << std::fixed << std::setprecision(2) << items->get(i);
+            result += oss.str();
+        } else {
+            result += std::to_string(items->get(i));
+        }
 
-        if (i != get_size() - 1) {
+        if (i != items->get_size() - 1) {
             result += ", ";
         }
     }
@@ -122,3 +134,4 @@ std::string ListSequence<T>::to_string() const{
     result += "}";
     return result;
 }
+

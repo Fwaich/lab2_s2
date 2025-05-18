@@ -1,5 +1,8 @@
 #pragma once
+#include <type_traits>
+#include <sstream>
 #include <iostream>
+#include <iomanip>
 #include "DynamicArray.h"
 #include "Sequence.h"
 #include "exceptions.h"
@@ -135,12 +138,21 @@ ArraySequence<T>* ArraySequence<T>::get_subsequence(int start_index, int end_ind
     return sub_array;
 }
 
+
 template <typename T>
 std::string ArraySequence<T>::to_string() const {
     std::string result = "[";
 
     for (int i = 0; i < items->get_size(); ++i) {
-        result += std::to_string(items->get(i)); 
+        if constexpr (std::is_same_v<T, std::string>) {
+            result += items->get(i);
+        } else if constexpr (std::is_same_v<T, double>) {
+            std::ostringstream oss;
+            oss << std::fixed << std::setprecision(3) << items->get(i);
+            result += oss.str();
+        } else {
+            result += std::to_string(items->get(i));
+        }
 
         if (i != items->get_size() - 1) {
             result += ", ";
@@ -150,3 +162,4 @@ std::string ArraySequence<T>::to_string() const {
     result += "]";
     return result;
 }
+

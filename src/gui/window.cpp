@@ -1,6 +1,8 @@
 #include "gui/window.hpp"
 #include "core/Adapter.h"
 #include "core/IntAdapter.h"
+#include "core/DoubleAdapter.h"
+#include "core/StringAdapter.h"
 #include "core/Sequence.h"
 #include "core/ArraySequence.h"
 #include "core/ListSequence.h"
@@ -15,15 +17,15 @@ MyFrame::MyFrame() : wxFrame(nullptr, wxID_ANY, "WX"){
 
 
     wxMenu* menuStruct = new wxMenu; 
-    menuStruct->Append(wxID_ANY, "Dynamic Array");
-    menuStruct->Append(wxID_ANY, "Linked List");
+    menuStruct->Append(ID_Struct_Array, "Dynamic Array");
+    menuStruct->Append(ID_Struct_List, "Linked List");
     menuStruct->Append(wxID_ANY, "Const Dynamic Array");
     menuStruct->Append(wxID_ANY, "Const Linked List");
 
     wxMenu* menuType = new wxMenu; 
-    menuType->Append(wxID_ANY, "Int");
-    menuType->Append(wxID_ANY, "Double");
-    menuType->Append(wxID_ANY, "String");
+    menuType->Append(ID_Type_Int, "Int");
+    menuType->Append(ID_Type_Double, "Double");
+    menuType->Append(ID_Type_String, "String");
  
     wxMenuBar *menuBar = new wxMenuBar;
     menuBar->Append(menuStruct, "&Struct");
@@ -31,8 +33,7 @@ MyFrame::MyFrame() : wxFrame(nullptr, wxID_ANY, "WX"){
  
     SetMenuBar( menuBar );
  
-    // int_seq = new ArraySequence<int>();
-    a = new IntAdapter(new ArraySequence<int>());
+    a = new DoubleAdapter(new ArraySequence<double>());
 
     wxPanel* panel = new wxPanel(this);
 
@@ -59,74 +60,14 @@ MyFrame::MyFrame() : wxFrame(nullptr, wxID_ANY, "WX"){
     Bind(wxEVT_BUTTON, &MyFrame::OnGetSub, this, ID_GetSub);
     
     Bind(wxEVT_MENU, &MyFrame::OnExit, this, wxID_EXIT);
+
+    Bind(wxEVT_MENU, &MyFrame::OnSelectStructArray, this, ID_Struct_Array);
+    Bind(wxEVT_MENU, &MyFrame::OnSelectStructList, this, ID_Struct_List);
+    Bind(wxEVT_MENU, &MyFrame::OnSelectTypeInt, this, ID_Type_Int);
+    Bind(wxEVT_MENU, &MyFrame::OnSelectTypeDouble, this, ID_Type_Double);
+    Bind(wxEVT_MENU, &MyFrame::OnSelectTypeString, this, ID_Type_String);
+
  }
  
-void MyFrame::OnAppend(wxCommandEvent& event)
-{
-    std::string value = std::string(inputField->GetValue());
-    a->append(value);
-    UpdateDisplay();
-}
 
-void MyFrame::OnPrepend(wxCommandEvent& event)
-{
-    std::string value = std::string(inputField->GetValue());
-    a->prepend(value);
-    UpdateDisplay();
-}
-
-void MyFrame::OnSet(wxCommandEvent& event)
-{
-    std::string value = std::string(inputField->GetValue());
-    a->prepend(value);
-    UpdateDisplay();
-}
-
-void MyFrame::OnGet(wxCommandEvent& event)
-{
-    // std::string value = a->prepend(value);
-    UpdateDisplay();
-}
-
-
-void MyFrame::OnGetFirst(wxCommandEvent& event)
-{
-    std::string value = a->get_first();
-    wxMessageBox(value, "First Member", wxOK | wxICON_NONE, this);
-}
-
-void MyFrame::OnGetLast(wxCommandEvent& event)
-{
-    std::string value = a->get_last();
-    wxMessageBox(value, "Last Member", wxOK | wxICON_NONE, this);
-}
-
-void MyFrame::OnGetSize(wxCommandEvent& event)
-{
-    std::string value = a->get_size();
-    wxMessageBox(value, "Size Of Struct", wxOK | wxICON_NONE, this);
-}
-
-void MyFrame::OnGetSub(wxCommandEvent& event)
-{
-    std::string value = std::string(inputField->GetValue());
-    a->prepend(value);
-}
-
-void MyFrame::UpdateDisplay()
-{
-    displayBox->Clear();
-    // for (int i = 0; i < int_seq->get_size(); i++){
-    //     int element = int_seq->get(i);
-    //     displayBox->Append(std::to_string(element));
-    // }
-    std::string output = a->to_string();
-    displayBox->Append(output);
-}
-
-void MyFrame::OnExit(wxCommandEvent& event)
-{
-    delete a;
-    Close(true);
-}
 

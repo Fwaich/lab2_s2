@@ -31,7 +31,7 @@ public:
     T get(int index) const;
     T get_first() const;
     T get_last()const;
-    int get_length() const;
+    int get_size() const;
     LinkedList<T>* get_sublist(int start_index, int end_index) const;
 
 
@@ -146,7 +146,7 @@ T LinkedList<T>::get_last() const {
 };
 
 template <typename T>
-int LinkedList<T>::get_length() const {
+int LinkedList<T>::get_size() const {
     return length;
 }
 
@@ -154,8 +154,8 @@ template <typename T>
 LinkedList<T>* LinkedList<T>::get_sublist(int start_index, int end_index) const {
     if (!head) throw data_is_null();
 
-    if (start_index < 0 || start_index >= get_length() ||
-        end_index < 0 || end_index >= get_length()) {
+    if (start_index < 0 || start_index >= get_size() ||
+        end_index < 0 || end_index >= get_size()) {
         throw list_out_of_range();
     }
 

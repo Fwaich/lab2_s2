@@ -2,8 +2,17 @@
 #include <wx/wx.h>
 #include "core/Adapter.h"
 
-enum {
-   ID_Append,
+enum MenuIDs {
+   ID_Struct_Array = 101,
+   ID_Struct_List,
+   ID_Type_Int,
+   ID_Type_Double,
+   ID_Type_String
+};
+
+
+enum ButtonIDs {
+   ID_Append = 201,
    ID_Prepend,
    ID_Set,
    ID_Get,
@@ -13,12 +22,14 @@ enum {
    ID_GetSub,
 };
 
-enum DataType {ARRAY, LIST};
-enum SequenceType {INT, DOUBLE, STRING};
+enum StructType {ARRAY, LIST};
+enum DataType {INT, DOUBLE, STRING};
 
 class MyFrame : public wxFrame {
 private:
 
+   StructType current_struct = ARRAY;
+   DataType current_type = INT;
    Adapter* a = nullptr;
 
    wxTextCtrl* inputField;
@@ -35,7 +46,14 @@ private:
    void OnGetSize(wxCommandEvent& event);
    void OnGetSub(wxCommandEvent& event);
 
+   void OnSelectStructArray(wxCommandEvent& event);
+   void OnSelectStructList(wxCommandEvent& event);
+   void OnSelectTypeInt(wxCommandEvent& event);
+   void OnSelectTypeDouble(wxCommandEvent& event);
+   void OnSelectTypeString(wxCommandEvent& event);
+
    void UpdateDisplay();
+   void RecreateAdapter();
 
 public:
 
