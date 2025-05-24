@@ -36,32 +36,41 @@ void MyFrame::RecreateAdapter()
 void MyFrame::OnSelectStructArray(wxCommandEvent& event)
 {
     current_struct = ARRAY;
-    std::cout << "aa" << std::endl;
     RecreateAdapter();
+    structInfo->SetLabel("Current struct: Array");
+    UpdateLayout();
 }
 
 void MyFrame::OnSelectStructList(wxCommandEvent& event)
 {
     current_struct = LIST;
     RecreateAdapter();
+    structInfo->SetLabel("Current struct: List");
+    UpdateLayout();
 }
 
 void MyFrame::OnSelectTypeInt(wxCommandEvent& event)
 {
     current_type = INT;
     RecreateAdapter();
+    typeInfo->SetLabel("Current type: Int");
+    UpdateLayout();
 }
 
 void MyFrame::OnSelectTypeDouble(wxCommandEvent& event)
 {
     current_type = DOUBLE;
     RecreateAdapter();
+    typeInfo->SetLabel("Current type: Double");
+    UpdateLayout();
 }
 
 void MyFrame::OnSelectTypeString(wxCommandEvent& event)
 {
     current_type = STRING;
     RecreateAdapter();
+    typeInfo->SetLabel("Current type: String");
+    UpdateLayout();
 }
 
 
@@ -69,5 +78,11 @@ void MyFrame::OnExit(wxCommandEvent& event)
 {
     delete seq;
     Close(true);
+}
+
+void MyFrame::UpdateLayout() 
+{
+    panel->Layout();
+    panel->Refresh(); 
 }
 

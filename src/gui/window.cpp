@@ -34,8 +34,15 @@ MyFrame::MyFrame() : wxFrame(nullptr, wxID_ANY, "WX") {
     current_struct = ARRAY;
     current_type = INT;
     seq = new IntAdapter(new ArraySequence<int>());
+    
+    panel = new wxPanel(this);
 
-    wxPanel* panel = new wxPanel(this);
+    structInfo = new wxStaticText(panel, wxID_ANY, "Current struct: Array");
+    typeInfo = new wxStaticText(panel, wxID_ANY, "Current type: Int");
+
+    wxBoxSizer* infoBox = new wxBoxSizer(wxHORIZONTAL);
+    infoBox->Add(structInfo, 0, wxLEFT, 5);
+    infoBox->Add(typeInfo, 0, wxLEFT, 10);
 
     inputField = new wxTextCtrl(panel, wxID_ANY, "");
     displayBox = new wxTextCtrl(
@@ -72,6 +79,7 @@ MyFrame::MyFrame() : wxFrame(nullptr, wxID_ANY, "WX") {
 
     //expand - перпердекулярно, proportion - вдоль оси сайзера
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
+    mainSizer->Add(infoBox, 0, wxALL, 10);
     mainSizer->Add(inputField, 0, wxEXPAND | wxALL, 10);
     mainSizer->Add(displayBox, 1, wxEXPAND | wxALL, 10); 
     mainSizer->Add(buttonPanel, 0, wxEXPAND | wxALL, 10);

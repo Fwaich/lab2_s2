@@ -28,12 +28,18 @@ enum DataType {INT, DOUBLE, STRING};
 class MyFrame : public wxFrame {
 private:
 
+   wxPanel* panel;
+
    StructType current_struct = ARRAY;
    DataType current_type = INT;
    Adapter* seq = nullptr;
 
    wxTextCtrl* inputField;
    wxTextCtrl* displayBox;
+
+   wxStaticText* structInfo;
+   wxStaticText* typeInfo;
+
 
    void OnExit(wxCommandEvent& event);
 
@@ -53,6 +59,7 @@ private:
    void OnSelectTypeString(wxCommandEvent& event);
 
    void UpdateDisplay();
+   void UpdateLayout();
    void RecreateAdapter();
 
 public:
