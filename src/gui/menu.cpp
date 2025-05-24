@@ -9,25 +9,25 @@
 
 void MyFrame::RecreateAdapter()
 {
-    if (a != nullptr) delete a;
+    if (seq != nullptr) delete seq;
 
     if (current_type == INT) {
         if (current_struct == ARRAY)
-            a = new IntAdapter(new ArraySequence<int>());
+            seq = new IntAdapter(new ArraySequence<int>());
         else
-            a = new IntAdapter(new ListSequence<int>());
+            seq = new IntAdapter(new ListSequence<int>());
     }
     else if (current_type == DOUBLE) {
         if (current_struct == ARRAY)
-            a = new DoubleAdapter(new ArraySequence<double>());
+            seq = new DoubleAdapter(new ArraySequence<double>());
         else
-            a = new DoubleAdapter(new ListSequence<double>());
+            seq = new DoubleAdapter(new ListSequence<double>());
     }
     else if (current_type == STRING) {
         if (current_struct == ARRAY)
-            a = new StringAdapter(new ArraySequence<std::string>());
+            seq = new StringAdapter(new ArraySequence<std::string>());
         else
-            a = new StringAdapter(new ListSequence<std::string>());
+            seq = new StringAdapter(new ListSequence<std::string>());
     }
 
     UpdateDisplay();
@@ -67,7 +67,7 @@ void MyFrame::OnSelectTypeString(wxCommandEvent& event)
 
 void MyFrame::OnExit(wxCommandEvent& event)
 {
-    delete a;
+    delete seq;
     Close(true);
 }
 

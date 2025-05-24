@@ -30,10 +30,10 @@ private:
 
    StructType current_struct = ARRAY;
    DataType current_type = INT;
-   Adapter* a = nullptr;
+   Adapter* seq = nullptr;
 
    wxTextCtrl* inputField;
-   wxListBox* displayBox;
+   wxTextCtrl* displayBox;
 
    void OnExit(wxCommandEvent& event);
 
