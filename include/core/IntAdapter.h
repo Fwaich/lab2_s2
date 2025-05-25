@@ -1,6 +1,7 @@
 #pragma once
 #include "core/Adapter.h"
 #include "core/Sequence.h"
+#include "core/exceptions.h"
 
 class IntAdapter : public Adapter 
 {
@@ -8,7 +9,19 @@ private:
     Sequence<int>* sequence;
 
     int from_string(std::string str) {
-        return std::stoi(str);
+        try {
+            size_t pos;
+            int val = std::stoi(str, &pos);
+    
+            if (pos != str.length()) {
+                throw wrong_type();
+            }
+    
+            return val;
+    
+        } catch (const std::exception&) {
+            throw wrong_type();
+        }
     }
 
 public:

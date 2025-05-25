@@ -17,3 +17,7 @@ public:
     virtual const char* what() const noexcept override;
 };
 
+class wrong_type : public std::exception {
+public:
+    virtual const char* what() const noexcept override;
+};

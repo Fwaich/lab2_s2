@@ -20,6 +20,7 @@ enum ButtonIDs {
    ID_GetLast,
    ID_GetSize,
    ID_GetSub,
+   ID_ShowSub
 };
 
 enum StructType {ARRAY, LIST};
@@ -33,6 +34,9 @@ private:
    StructType current_struct = ARRAY;
    DataType current_type = INT;
    Adapter* seq = nullptr;
+   Adapter* sub_seq = nullptr;
+
+   wxString sub_str;
 
    wxTextCtrl* inputField;
    wxTextCtrl* displayBox;
@@ -51,6 +55,7 @@ private:
    void OnGetLast(wxCommandEvent& event);
    void OnGetSize(wxCommandEvent& event);
    void OnGetSub(wxCommandEvent& event);
+   void OnShowSub(wxCommandEvent& event);
 
    void OnSelectStructArray(wxCommandEvent& event);
    void OnSelectStructList(wxCommandEvent& event);

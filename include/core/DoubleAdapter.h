@@ -1,6 +1,7 @@
 #pragma once
 #include "core/Adapter.h"
 #include "core/Sequence.h"
+#include "core/exceptions.h"
 
 class DoubleAdapter : public Adapter 
 {
@@ -8,7 +9,19 @@ private:
     Sequence<double>* sequence;
 
     double from_string(std::string str) {
-        return std::stod(str);
+        try {
+            size_t pos;
+            double val = std::stod(str, &pos);
+    
+            if (pos != str.length()) {
+                throw wrong_type();
+            }
+    
+            return val;
+    
+        } catch (const std::exception&) {
+            throw wrong_type();
+        }
     }
 
 public:

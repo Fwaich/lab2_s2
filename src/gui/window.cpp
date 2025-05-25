@@ -70,6 +70,7 @@ MyFrame::MyFrame() : wxFrame(nullptr, wxID_ANY, "WX") {
     wxBoxSizer* subsBox = new wxBoxSizer(wxVERTICAL);
     subsBox->Add(new wxStaticText(buttonPanel, wxID_ANY, "Subs"), 0, wxALL, 5);
     subsBox->Add(new wxButton(buttonPanel, ID_GetSub, "Get Subsequence"), 0, wxALL, 5);
+    subsBox->Add(new wxButton(buttonPanel, ID_ShowSub, "Show Subsequence"), 0, wxALL, 5);
 
     hbox->Add(getsBox, 1, wxEXPAND | wxALL, 10);
     hbox->Add(setsBox, 1, wxEXPAND | wxALL, 10);
@@ -80,6 +81,7 @@ MyFrame::MyFrame() : wxFrame(nullptr, wxID_ANY, "WX") {
     //expand - перпердекулярно, proportion - вдоль оси сайзера
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     mainSizer->Add(infoBox, 0, wxALL, 10);
+    mainSizer->Add(new wxStaticText(panel, wxID_ANY, "Target Value:"), 0, wxTOP | wxLEFT, 10);
     mainSizer->Add(inputField, 0, wxEXPAND | wxALL, 10);
     mainSizer->Add(displayBox, 1, wxEXPAND | wxALL, 10); 
     mainSizer->Add(buttonPanel, 0, wxEXPAND | wxALL, 10);
@@ -96,6 +98,7 @@ MyFrame::MyFrame() : wxFrame(nullptr, wxID_ANY, "WX") {
     Bind(wxEVT_BUTTON, &MyFrame::OnGetLast, this, ID_GetLast);
     Bind(wxEVT_BUTTON, &MyFrame::OnGetSize, this, ID_GetSize);
     Bind(wxEVT_BUTTON, &MyFrame::OnGetSub, this, ID_GetSub);
+    Bind(wxEVT_BUTTON, &MyFrame::OnShowSub, this, ID_ShowSub);
 
     Bind(wxEVT_MENU, &MyFrame::OnExit, this, wxID_EXIT);
     Bind(wxEVT_MENU, &MyFrame::OnSelectStructArray, this, ID_Struct_Array);

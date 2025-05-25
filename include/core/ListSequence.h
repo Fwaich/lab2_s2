@@ -87,13 +87,13 @@ T ListSequence<T>::get(int index) const{
 
 template <typename T>
 T ListSequence<T>::get_first() const {
-    if (items->get_size() == 0)  throw out_of_range("get_first: list not initialized");
+    if (items->get_size() == 0)  throw list_out_of_range();
     return items->get_first();
 };
 
 template <typename T>
 T ListSequence<T>::get_last() const {
-    if (items->get_size() == 0)  throw out_of_range("get_last: list not initialized");
+    if (items->get_size() == 0)  throw list_out_of_range();
     return items->get_last();
 };
 
