@@ -46,7 +46,7 @@ DynamicArray<T>::DynamicArray(T* items, int count){
 template <typename T>
 DynamicArray<T>::~DynamicArray(){
     delete[] data;
-    cout << "delete da" << endl;
+    // cout << "delete da" << endl;
 };
 
 template <typename T>

@@ -38,16 +38,26 @@ void MyFrame::OnSet(wxCommandEvent& event)
 {
     try 
     {
-
         std::string value = std::string(inputField->GetValue());
-    
-        wxString index_str = wxGetTextFromUser("Enter index", "", "", this);
+
+        wxTextEntryDialog dlg(this, "Enter index", "Set element");
+        if (dlg.ShowModal() != wxID_OK) {
+            return;
+        }
+
+        wxString index_str = dlg.GetValue();
+
+        if (index_str.IsEmpty()) {
+            wxMessageBox("Error: index is required", "Error", wxICON_ERROR);
+            return;
+        }
+
         long index;
         if (!index_str.ToLong(&index)) {
             wxMessageBox("Error: index must be a number", "Error", wxICON_ERROR);
             return;
         }
-        
+
         seq->set(index, value);
         inputField->Clear();
         inputField->SetFocus();
@@ -67,7 +77,17 @@ void MyFrame::OnGet(wxCommandEvent& event)
     try 
     {
 
-        wxString index_str = wxGetTextFromUser("Enter index", "", "", this);
+        wxTextEntryDialog dlg(this, "Enter index", "");
+        if (dlg.ShowModal() != wxID_OK) {
+            return;
+        }
+
+        wxString index_str = dlg.GetValue();
+        if (index_str.IsEmpty()) {
+            wxMessageBox("Error: index is required", "Error", wxICON_ERROR);
+            return;
+        }
+
         long index;
         if (!index_str.ToLong(&index)) {
             wxMessageBox("Error: index must be a number", "Error", wxICON_ERROR);
@@ -157,6 +177,8 @@ void MyFrame::OnGetSub(wxCommandEvent& event)
         wxMessageBox(e.what(), "Data Error", wxOK | wxICON_ERROR);
     } catch(const list_out_of_range& e){
         wxMessageBox(e.what(), "Data Error", wxOK | wxICON_ERROR);
+    }  catch(const data_is_null& e){
+        wxMessageBox(e.what(), "Data Error", wxOK | wxICON_ERROR);
     }
 }
 
@@ -171,6 +193,45 @@ void MyFrame::OnShowSub(wxCommandEvent& event)
     }
 
     wxMessageBox(sub_str, "Sub", wxOK | wxICON_INFORMATION, this);
+}
+
+void MyFrame::OnMap(wxCommandEvent& event)
+{
+    try 
+    {
+        if (current_type != STRING){
+                wxTextEntryDialog dlg(this, "Enter multiplier", "");
+            if (dlg.ShowModal() != wxID_OK) {
+                return;
+            }
+
+            wxString multiplier_str = dlg.GetValue();
+            if (multiplier_str.IsEmpty()) {
+                wxMessageBox("Error: multiplier is required", "Error", wxICON_ERROR);
+                return;
+            }
+            
+            double multiplier;
+            if (!multiplier_str.ToDouble(&multiplier)) {
+                wxMessageBox("Error: incorrect input", "Error", wxICON_ERROR);
+                return;
+            }
+
+            seq->map(multiplier);
+        
+        } else {
+
+            seq->map(0);
+            
+        }
+        
+        // wxMessageBox(seq->get((int)index), "Selected member", wxOK | wxICON_NONE, this);
+        inputField->SetFocus();
+        UpdateDisplay();
+
+    } catch(const data_is_null& e){
+        wxMessageBox(e.what(), "Data Error", wxOK | wxICON_ERROR);
+    }
 }
 
 void MyFrame::UpdateDisplay()

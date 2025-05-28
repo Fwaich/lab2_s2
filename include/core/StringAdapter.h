@@ -7,10 +7,6 @@ class StringAdapter : public Adapter
 private:
     Sequence<std::string>* sequence;
 
-    // std::string from_string(std::string str) {
-    //     return std::stod(str);
-    // }
-
 public:
 
     StringAdapter(Sequence<std::string>* seq){
@@ -59,6 +55,11 @@ public:
         );
         return adapter;
     } 
+
+    StringAdapter* map(double factor) override{
+        sequence->map(0);
+        return this;
+    }
 
     std::string to_string() const {
         return sequence->to_string();

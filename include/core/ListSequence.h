@@ -1,7 +1,6 @@
 #pragma once
 #include <type_traits>
 #include <sstream>
-#include <iostream>
 #include <iomanip>
 #include "LinkedList.h"
 #include "Sequence.h"
@@ -23,11 +22,14 @@ public:
     ListSequence<T>* append(T item) override;
     ListSequence<T>* prepend(T item) override;
     ListSequence<T>* set(int index, T item) override;
+
     T get(int index) const override;
     T get_first() const override;
     T get_last() const override;
     int get_size() const override;
     ListSequence<T>* get_subsequence(int start_index, int end_index) const override;
+
+    ListSequence<T>* map(double multiplier) override;
 
     std::string to_string() const override;
 
@@ -109,6 +111,23 @@ ListSequence<T>* ListSequence<T>::get_subsequence(int start_index, int end_index
     delete sublist;
     return sublist_sequence;
 };
+
+template <typename T>
+ListSequence<T>* ListSequence<T>::map(double multiplier) {
+    if (get_size() == 0) throw data_is_null();
+    for (int i = 0; i < items->get_size(); ++i) {
+        T value = items->get(i);
+        if constexpr (std::is_same_v<T, std::string>) {
+            for (char& c : value) {
+                c = std::toupper(static_cast<unsigned char>(c));
+            }
+            items->set(i, value);
+        } else {
+            items->set(i, value * multiplier);
+        }
+    }
+    return this;
+}
 
 
 template <typename T>

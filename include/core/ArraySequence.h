@@ -1,7 +1,6 @@
 #pragma once
 #include <type_traits>
 #include <sstream>
-#include <iostream>
 #include <iomanip>
 #include "DynamicArray.h"
 #include "Sequence.h"
@@ -22,11 +21,15 @@ public:
     ArraySequence<T>* append(T item) override;
     ArraySequence<T>* prepend(T item) override;
     ArraySequence<T>* set(int index, T item) override;
+
     T get(int index) const override;
     T get_first() const override;
     T get_last() const override;
     int get_size() const override;
+
     ArraySequence<T>* get_subsequence(int start_index, int end_index) const override;
+
+    ArraySequence<T>* map(double multiplier) override;
 
     std::string to_string() const override;
 
@@ -113,6 +116,7 @@ T ArraySequence<T>::get_last() const {
 template <typename T>
 ArraySequence<T>* ArraySequence<T>::get_subsequence(int start_index, int end_index) const {
     if (!items) throw data_is_null();
+    if (get_size() == 0) throw data_is_null();
 
     if (start_index < 0 || start_index >= items->get_size() ||
         end_index < 0 || end_index >= items->get_size()) {
@@ -136,6 +140,24 @@ ArraySequence<T>* ArraySequence<T>::get_subsequence(int start_index, int end_ind
     ArraySequence<T>* sub_array = new ArraySequence<T>(sub_data, sub_size);
     delete[] sub_data;
     return sub_array;
+}
+
+template <typename T>
+ArraySequence<T>* ArraySequence<T>::map(double multiplier) {
+    if (get_size() == 0) throw data_is_null();
+
+    for (int i = 0; i < items->get_size(); ++i) {
+        T value = items->get(i);
+        if constexpr (std::is_same_v<T, std::string>) {
+            for (char& c : value) {
+                c = std::toupper(static_cast<unsigned char>(c));
+            }
+            items->set(i, value);
+        } else {
+            items->set(i, value * multiplier);
+        }
+    }
+    return this;
 }
 
 

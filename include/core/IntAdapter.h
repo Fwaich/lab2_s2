@@ -74,7 +74,12 @@ public:
             sequence->get_subsequence(start_index, end_index)
         );
         return adapter;
-    } 
+    }
+    
+    IntAdapter* map(double factor) override{
+        sequence->map(factor);
+        return this;
+    }
 
     std::string to_string() const {
         return sequence->to_string();

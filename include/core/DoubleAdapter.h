@@ -76,6 +76,11 @@ public:
         return adapter;
     } 
 
+    DoubleAdapter* map(double factor) override{
+        sequence->map(factor);
+        return this;
+    }
+
     std::string to_string() const {
         return sequence->to_string();
     } 

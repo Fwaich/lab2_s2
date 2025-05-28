@@ -16,6 +16,7 @@ public:
     virtual std::string get_last() const = 0;
     virtual std::string get_size() const = 0;
     virtual Adapter* get_subsequence(int start_index, int end_index) const = 0;
+    virtual Adapter* map(double factor) = 0;
 
     virtual std::string to_string() const = 0; 
 

@@ -33,7 +33,7 @@ MyFrame::MyFrame() : wxFrame(nullptr, wxID_ANY, "WX") {
 
     current_struct = ARRAY;
     current_type = INT;
-    seq = new IntAdapter(new ArraySequence<int>());
+    seq = new IntAdapter(new ArraySequence<int>);
     
     panel = new wxPanel(this);
 
@@ -72,9 +72,14 @@ MyFrame::MyFrame() : wxFrame(nullptr, wxID_ANY, "WX") {
     subsBox->Add(new wxButton(buttonPanel, ID_GetSub, "Get Subsequence"), 0, wxALL, 5);
     subsBox->Add(new wxButton(buttonPanel, ID_ShowSub, "Show Subsequence"), 0, wxALL, 5);
 
+    wxBoxSizer* funcsBox = new wxBoxSizer(wxVERTICAL);
+    funcsBox->Add(new wxStaticText(buttonPanel, wxID_ANY, "Funcs"), 0, wxALL, 5);
+    funcsBox->Add(new wxButton(buttonPanel, ID_Map, "Map"), 0, wxALL, 5);
+
     hbox->Add(getsBox, 1, wxEXPAND | wxALL, 10);
     hbox->Add(setsBox, 1, wxEXPAND | wxALL, 10);
     hbox->Add(subsBox, 1, wxEXPAND | wxALL, 10);
+    hbox->Add(funcsBox, 1, wxEXPAND | wxALL, 10);
 
     buttonPanel->SetSizer(hbox);
 
@@ -99,6 +104,7 @@ MyFrame::MyFrame() : wxFrame(nullptr, wxID_ANY, "WX") {
     Bind(wxEVT_BUTTON, &MyFrame::OnGetSize, this, ID_GetSize);
     Bind(wxEVT_BUTTON, &MyFrame::OnGetSub, this, ID_GetSub);
     Bind(wxEVT_BUTTON, &MyFrame::OnShowSub, this, ID_ShowSub);
+    Bind(wxEVT_BUTTON, &MyFrame::OnMap, this, ID_Map);
 
     Bind(wxEVT_MENU, &MyFrame::OnExit, this, wxID_EXIT);
     Bind(wxEVT_MENU, &MyFrame::OnSelectStructArray, this, ID_Struct_Array);

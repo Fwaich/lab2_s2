@@ -77,7 +77,7 @@ LinkedList<T>::~LinkedList(){
         delete node->prev;
     }
     delete node;
-    cout << "delete ll" << endl;
+    // cout << "delete ll" << endl;
 };
 
 template <typename T>

@@ -15,6 +15,12 @@ LIBOBJ = $(patsubst $(SRC)/core/%.cpp, $(OBJ)/core/%.o, $(LIBSRC))
 GUISRC = $(wildcard $(SRC)/gui/*.cpp)
 GUIOBJ = $(patsubst $(SRC)/gui/%.cpp, $(OBJ)/gui/%.o, $(GUISRC))
 
+#test
+test: $(BIN)/tests
+
+$(BIN)/tests: $(LIBSRC)
+	$(CXX) -I$(INC) $(LIBSRC) -o $@
+
 #lib
 core: $(LIB)/libcore.so
 
@@ -37,13 +43,18 @@ $(BIN)/gui: $(GUIOBJ) core
 	$(CXX)  $(GUIOBJ) $(LIBFLAGS) -o $@
 
 
+runtests: test
+	./$(BIN)/tests
+
 run: gui
 	./$(BIN)/gui
 
 clean: 
+	rm -r bin/*
 	rm -r obj/*
 
 cleanall: clean
-	rm -r bin/*
 	rm -r lib/*
+
+.PHONY: runtests tests
 	

@@ -20,7 +20,8 @@ enum ButtonIDs {
    ID_GetLast,
    ID_GetSize,
    ID_GetSub,
-   ID_ShowSub
+   ID_ShowSub,
+   ID_Map
 };
 
 enum StructType {ARRAY, LIST};
@@ -56,6 +57,7 @@ private:
    void OnGetSize(wxCommandEvent& event);
    void OnGetSub(wxCommandEvent& event);
    void OnShowSub(wxCommandEvent& event);
+   void OnMap(wxCommandEvent& event);
 
    void OnSelectStructArray(wxCommandEvent& event);
    void OnSelectStructList(wxCommandEvent& event);
